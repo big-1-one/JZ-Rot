@@ -1,0 +1,21 @@
+{
+  "name": "jz-rot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./test.js"
+  },
+
+  "keywords": [
+    "rot",
+    "rot13",
+    "cipher",
+    "encrypt",
+    "decrypt"
+  ],
+
+  "author": "JZ",
+  "license": "MIT"
+}
