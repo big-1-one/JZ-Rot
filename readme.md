@@ -16,9 +16,9 @@ data.AddRanges(ranges);
 var text = `{"key": "property", "name": "rot 64 cipher", "settings": ["socks", "psiphone", "v2ray"]}`;
 
 
-var ecText = jrot.encrypt(text);
+var ecText = jrot.encrypt(text, true);
 
-var dcText = jrot.decrypt(ecText);
+var dcText = jrot.decrypt(ecText, true);
 
 
 console.log( `text === dcText => ${text === dcText}` );
@@ -33,10 +33,10 @@ var imData = Data.import(exData);
 
 var jrot2 = new JRot(imData);
 
-var ecText1 = jrot2.encrypt(text);
-var dcText1 = jrot2.decrypt(ecText1);
+var ecText1 = jrot2.encrypt(text, false);
+var dcText1 = jrot2.decrypt(ecText1, false);
 
-var dcText2 = jrot2.decrypt(ec);
+var dcText2 = jrot2.decrypt(ecText, true);
 
 
 console.log( `ecText === ecText1 => ${ecText === ecText1}` );

@@ -1,7 +1,7 @@
 {
   "name": "jz-rot",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Perform (complex & simple) rotational letter substitution (such as ROT-13) in JavaScript.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,11 +9,17 @@
   },
 
   "keywords": [
+    "jz-rot",
     "rot",
     "rot13",
+    "rot-13",
+    "rot-x",
     "cipher",
     "encrypt",
-    "decrypt"
+    "decrypt",
+    "encode",
+    "decode",
+    "crypto"
   ],
 
   "author": "JZ",
