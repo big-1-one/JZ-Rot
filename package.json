@@ -7,7 +7,6 @@
   "scripts": {
     "test": "node ./test.js"
   },
-
   "keywords": [
     "jz-rot",
     "rot",
@@ -21,7 +20,17 @@
     "decode",
     "crypto"
   ],
-
   "author": "JZ",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/big-1-one/JZ-Rot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/big-1-one/JZ-Rot/issues"
+  },
+  "homepage": "https://github.com/big-1-one/JZ-Rot#readme"
 }
