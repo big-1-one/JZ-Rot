@@ -1,8 +1,7 @@
 
 
 ```js
-import { DataRange, Data, JRot } from './index.js';
-import DataRangeBuilder from './lib/DataRangeBuilder.js';
+import { DataRange, Data, JRot, DataRangeBuilder } from './index.js';
 
 const data = new Data("name-for-data", 64);
 

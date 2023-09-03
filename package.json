@@ -1,6 +1,6 @@
 {
   "name": "jz-rot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Perform (complex & simple) rotational letter substitution (such as ROT-13) in JavaScript.",
   "main": "index.js",
   "type": "module",
