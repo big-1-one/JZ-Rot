@@ -9,4 +9,6 @@ import JRot from './lib/jrot.js';
 import DataRangeBuilder from './lib/DataRangeBuilder.js';
 import { Rot13 } from './lib/rot13.js';
 
-export {DataRange, Data, JRot, DataRangeBuilder, Rot13};
+const Version = "1.2.0";
+
+export { Version, DataRange, Data, JRot, DataRangeBuilder, Rot13 };
