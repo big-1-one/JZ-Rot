@@ -35,7 +35,7 @@ var ecText = jrot.encrypt(text, true);
 var dcText = jrot.decrypt(ecText, true);
 
 
-console.log( `text === dc => ${text === dcText}` );
+console.log( `text === dcText => ${text === dcText}` );
 
 
 var exData = data.export("string");
