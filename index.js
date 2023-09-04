@@ -1,14 +1,12 @@
-// module.exports = {
-//     get DataRange () { return require('./lib/core/dataRange') },
-//     get Data () { return require('./lib/core/data') },
-//     get JRot () { return require('./lib/jrot') }
-// }
-import DataRange from './lib/core/dataRange.js';
-import Data from './lib/core/data.js';
-import JRot from './lib/jrot.js';
-import DataRangeBuilder from './lib/DataRangeBuilder.js';
-import { Rot13 } from './lib/rot13.js';
+module.exports = {
+    get DataRange () { return require('./lib/core/DataRange') },
+    get DataRangeBuilder () { return require('./lib/DataRangeBuilder') },
 
-const Version = "1.2.0";
+    get Data () { return require('./lib/core/Data') },
 
-export { Version, DataRange, Data, JRot, DataRangeBuilder, Rot13 };
+    get JRot () { return require('./lib/Jrot') },
+
+    get Rot13 () { return require('./lib/Rot13') },
+
+    get Version () { return "2.0.0"; },
+};

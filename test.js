@@ -1,4 +1,6 @@
-import { DataRange, Data, JRot, DataRangeBuilder, Rot13 } from './index.js';
+// import { DataRange, Data, JRot, DataRangeBuilder, Rot13 } from './index.mjs';
+const { DataRange, Data, JRot, DataRangeBuilder, Rot13 } = require('.');
+
 
 const CODE = {
     a : "a".charCodeAt(),
@@ -12,7 +14,7 @@ const CODE = {
     to : 300,
     inc : 4,
     rc : 64,
-    tag : "Rot-64_complix"
+    tag : "Rot-64_complex"
 }
 
 // var from = CODE.from;
