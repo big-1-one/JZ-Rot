@@ -1,5 +1,5 @@
-// import { DataRange, Data, JRot, DataRangeBuilder, Rot13 } from './index.mjs';
-const { DataRange, Data, JRot, DataRangeBuilder, Rot13 } = require('.');
+import { DataRange, Data, JRot, DataRangeBuilder, Rot13 } from './index.mjs';
+// const { DataRange, Data, JRot, DataRangeBuilder, Rot13 } = require('.');
 
 
 const CODE = {
