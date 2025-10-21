@@ -1,1 +1,4 @@
-lib/base
+build
+/.vscode
+/node_modules
+/lib
