@@ -7,6 +7,24 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch CJS",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\tests\\index.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch MJS",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\tests\\index.mjs"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program Test",
             "skipFiles": [
                 "<node_internals>/**"
