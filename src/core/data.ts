@@ -1,4 +1,3 @@
-import { IRange, Range } from "./range.ts";
 import type {
 	RangeArg,
 	RangeArrayArgsNumber,
@@ -7,13 +6,15 @@ import type {
 	RangeObjectArgsNumber,
 	RangeSeparators,
 	RangeStringArgsNumber,
-} from "./types.d.ts";
+} from "./types.ts";
+import { Range } from "./range.ts";
+import type { IRange } from "./range.ts";
 
 
 export interface IData {
 	get rc(): number;
-	get ranges(): Range[];
-	get lastRange(): Range;
+	get ranges(): Range[] | IRange[];
+	get lastRange(): Range | IRange;
 	get length(): number;
 	HasIndex(index: number): boolean;
 	Has(code: number): boolean;

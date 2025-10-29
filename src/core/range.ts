@@ -7,7 +7,7 @@ import type {
 	RangeSeparators,
 	RangeStringArgsNumber,
 	RangeStringArgsString,
-} from "./types.d.ts";
+} from "./types.ts";
 import { Utils } from "../utils/index.ts";
 
 export interface IRange {

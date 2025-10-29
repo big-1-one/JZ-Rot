@@ -1,12 +1,13 @@
-import { Data, IData } from "./data.ts";
+import { Data } from "./data.ts";
+import type { IData } from "./data.ts";
 
 export type Options = {
     rot?: number;
     base64?: boolean;
 }
 
-interface IRotX {
-    data: Data | undefined;
+export interface IRotX {
+    data: Data | IData | undefined;
     encode(input: string, { rot, base64 }: Options): string;
     decode(input: string, { rot, base64 }: Options): string;
 }
