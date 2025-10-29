@@ -1,19 +1,16 @@
 {
-  "exclude": ["node_modules", "build", "tests"],
-  // Visit https://aka.ms/tsconfig to read more about this file
+  "include": ["src"],
   "compilerOptions": {
-    // File Layout
     "rootDir": "./src",
-    "outDir": "./build",
+    "outDir": "./dist",
     "module": "esnext",
     "target": "esnext",
     "lib": ["esnext"],
     "types": ["node"],
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
     "moduleDetection": "force",
     "strict": true,
     "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
   }
 }

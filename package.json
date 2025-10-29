@@ -2,14 +2,14 @@
   "name": "jz-rot",
   "version": "3.0.0",
   "description": "Perform (complex & simple) rotational letter substitution (such as ROT-13) in JavaScript.",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
   "scripts": {
     "test": "node ./tests/index.ts",
-    "build": "npx tsc",
     "start": "node ./src/index.ts",
-    "start:build": "node ./build/index.js"
+    "build": "rm -rf ./dist && pnpm tsup"
   },
   "keywords": [
     "jz-rot",
@@ -41,6 +41,7 @@
   "homepage": "https://github.com/big-1-one/JZ-Rot#readme",
   "devDependencies": {
     "@types/node": "^24.9.1",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.3"
   }
 }
