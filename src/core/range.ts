@@ -137,6 +137,10 @@ export class Range implements IRange {
 		return arr;
 	}
 
+	Clone(){
+		return new Range(this.from, this.to, this.inc);
+	}
+
 	toObject(): RangeObjectArgsNumber {
 		const { from, to, inc } = this;
 		return { from, to, inc };

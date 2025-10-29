@@ -163,6 +163,12 @@ export class Data implements IData {
 		return String.fromCharCode(this.decodeCode(code));
 	}
 
+	Clone(){
+		let data = new Data(`${this.tag}-cloned`, this.rc);
+		this.ranges.forEach(r => data.AddRange(r.Clone()));
+		return data;
+	}
+
 	export(type: RangeType = "string"): string {
 		let { tag, rc, ranges } = this;
 		const methods: Record<RangeType, RangeExportMethod> = {
