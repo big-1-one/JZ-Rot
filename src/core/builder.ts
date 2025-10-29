@@ -23,19 +23,14 @@ export class Builder {
                 index: step - 1,
             }
         });
-		let codes: number[] = [];
 		let output: Range[] = [];
         let temp: number | null = null;
 		for (let index = 0; index < max; index++) {
 			for (let ctx of contexts) {
                 if (index !== ctx.index || ctx.source >= ctx.length) continue;
                 let code = ctx.range.GetCode(ctx.source, 0);
-                if(temp !== null){
-                    output.push(new Range(temp, code, code - temp));
-                    temp = null;
-                }
-                else temp = code;
-                codes.push(code);
+
+                output.push(new Range(code, code, 1));
                 ctx.index += ctx.step;
                 ctx.source++;
 			}

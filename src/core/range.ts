@@ -8,8 +8,23 @@ import type {
 	RangeStringArgsNumber,
 	RangeStringArgsString,
 } from "./types.d.ts";
+import { Utils } from "../utils/index.ts";
 
-export class Range {
+export interface IRange {
+	get index(): number;
+	get length(): number;
+	get lastIndex(): number;
+	InRange(code: number): boolean;
+	IsConflict(range: IRange): boolean;
+	HasIndex(index: number): boolean;
+	Has(code: number): boolean;
+	GetIndex(code: number): number | -1;
+	GetCode(index: number, start?: number): number | -1;
+	GetChar(index: number, start?: number): string | undefined;
+	GetCodes(arr?: number[]): number[];
+	GetChars(arr?: string[]): string[];
+}
+export class Range implements IRange {
 	static defaultInc: number = 1;
 	static defaultSeparator: RangeSeparators = ":";
 
@@ -17,6 +32,9 @@ export class Range {
 	public to: number;
 	public inc: number;
 	public index: number;
+
+	private _codes: number[] | undefined;
+	private _chars: string[] | undefined;
 
 	constructor(...args: RangeArrayArgsNumber) {
 		const [from, to, inc = Range.defaultInc] = args;
@@ -35,11 +53,11 @@ export class Range {
 	}
 
 	get codes() {
-		return this.GetCodes();
+		return this._codes ??= this.GetCodes();
 	}
 
 	get chars() {
-		return this.GetChars();
+		return this._chars ??= this.GetChars();
 	}
 
 	get asObject() {
@@ -58,10 +76,8 @@ export class Range {
 	InRange(char: string): boolean;
 	InRange(code: number): boolean;
 	InRange(arg: RangeArg): boolean {
-		if (typeof arg === "string") arg = arg.charCodeAt(0);
-		if (typeof arg === "number" && this.from <= arg && arg <= this.to)
-			return true;
-		return false;
+		const code = Utils.parse(arg as string | number);
+		return code >= this.from && code <= this.to;
 	}
 
 	IsConflict(range: Range): boolean {
@@ -83,34 +99,32 @@ export class Range {
 	GetIndex(char: string): number | -1;
 	GetIndex(code: number): number | -1;
 	GetIndex(arg: RangeArg): number | -1 {
-		if (typeof arg == "string") arg = arg.charCodeAt(0);
-		if (!this.InRange(arg)) return -1;
-		if (this.from == arg) return this.index;
-		if (this.to == arg) return this.lastIndex;
-		let index = ((arg as number) - this.from) / this.inc;
-		if (!Number.isInteger(index)) return -1;
-		return this.index + index;
+		const code = Utils.parse(arg as string | number);
+		let index = (code - this.from) / this.inc;
+		if (!this.InRange(code)) return -1;
+		return Number.isInteger(index) ? this.index + index : -1;
 	}
 
 	// get code by index;
 	GetCode(index: number, start: number = this.index): number | -1 {
 		index = index - start;
-		let length = this.length - 1;
-		if (index == length) return this.to;
-		if (index > length) return -1;
-		return this.from + this.inc * index;
+		if (index < 0 || index >= this.length) return -1;
+
+		return index === this.length - 1 
+			? this.to 
+			: this.from + this.inc * index;
 	}
 
 	// get char by index;
 	GetChar(index: number, start: number = this.index): string | undefined {
-		var code = this.GetCode(index, start);
-		if (code == -1) return;
-		return String.fromCharCode(code);
+		const code = this.GetCode(index, start);
+		return code === -1 ? undefined : String.fromCharCode(code);
 	}
 
 	GetCodes(arr: number[] = []): number[] {
 		const { from, to, inc, length } = this;
-		for (let i = 0; i < length - 1; i++) arr.push(from + i * inc);
+		for (let i = 0; i < length - 1; i++)
+			arr.push(from + i * inc);
 		arr.push(to);
 		return arr;
 	}
@@ -140,31 +154,15 @@ export class Range {
 
 	static fromObject<T extends string>(args: RangeObjectArgs<T>): Range {
 		const { from, to, inc = Range.defaultInc } = args;
-		const nFrom = typeof from === "string"
-			? from.length === 1
-				? from.charCodeAt(0)
-				: parseInt(from)
-			: from;
-		const nTo = typeof to === "string"
-			? to.length === 1
-				? to.charCodeAt(0)
-				: parseInt(to)
-			: to;
+		const nFrom = Utils.parse(from);
+		const nTo = Utils.parse(to);
 		return new Range(nFrom, nTo, inc);
 	}
 
 	static fromArray<T extends string>(args: RangeArrayArgs<T>): Range {
 		const [from, to, inc = Range.defaultInc] = args;
-		const nFrom = typeof from === "string"
-			? from.length === 1
-				? from.charCodeAt(0)
-				: parseInt(from)
-			: from;
-		const nTo = typeof to === "string"
-			? to.length === 1
-				? to.charCodeAt(0)
-				: parseInt(to)
-			: to;
+		const nFrom = Utils.parse(from);
+		const nTo = Utils.parse(to);
 		return new Range(nFrom, nTo, inc);
 	}
 
@@ -174,7 +172,7 @@ export class Range {
 	): Range {
 		const [from, to, inc = Range.defaultInc] = string
 			.split(separator || Range.defaultSeparator)
-			.map((part) => part.length === 1? part.charCodeAt(0): parseInt(part));
+			.map((part, i) => i == 2 ? Utils.parse(part): Number.parseInt(part));
 		return new Range(from, to, inc);
 	}
 

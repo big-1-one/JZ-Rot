@@ -1,4 +1,4 @@
-import { Range } from "./range.ts";
+import { IRange, Range } from "./range.ts";
 import type {
 	RangeArg,
 	RangeArrayArgsNumber,
@@ -9,7 +9,26 @@ import type {
 	RangeStringArgsNumber,
 } from "./types.d.ts";
 
-export class Data {
+
+export interface IData {
+	get rc(): number;
+	get ranges(): Range[];
+	get lastRange(): Range;
+	get length(): number;
+	HasIndex(index: number): boolean;
+	Has(code: number): boolean;
+	GetIndex(index: number): number | -1;
+	GetCode(index: number): number | -1;
+	GetChar(index: number): string | undefined;
+	AddRange(range: IRange): this;
+	AddRanges(ranges: IRange[]): this;
+	encodeCode(code: number): number;
+	encodeChar(char: string): string;
+	decodeCode(code: number): number;
+	decodeChar(char: string): string;
+}
+
+export class Data implements IData {
 	static defaultSeparator: RangeSeparators = ":";
 
 	public tag: string;
@@ -44,10 +63,16 @@ export class Data {
 		return index < this.length && index >= 0;
 	}
 
+	Has(arg: RangeArg): boolean;
+	Has(char: string): boolean;
+	Has(code: number): boolean;
 	Has(char: RangeArg): boolean {
 		return this.ranges.some((r) => r.Has(char));
 	}
 
+	GetIndex(arg: RangeArg): number | -1;
+	GetIndex(char: string): number | -1;
+	GetIndex(code: number): number | -1;
 	GetIndex(char: RangeArg): number | -1 {
 		let index: number = -1;
 		this.ranges.find((r) => {
