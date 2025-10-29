@@ -11,7 +11,7 @@ pnpm install jz-rot@>=3
 
 ## Example
 
-```js
+```ts
 import { Range, Data, RotX, Builder } from "jz-rot";
 
 const { log } = console;
@@ -30,7 +30,7 @@ const input = `{"key": "property", "name": "rot 64 CIPHER", "settings": ["socks"
 const encoded = rot.encode(input, { /* rot: 5,  */ base64: false });
 const decoded = rot.decode(encoded ?? "", { /* rot: 5,  */ base64: false });
 
-log("(_input === _decoded) => ", input === decoded);
+log("(input === decoded) => ", input === decoded);
 
 const _range1 = Range.fromArray(["a", "z", 1]);
 const _range2 = Range.fromObject({ from: "A", to: "Z", inc: 1 });
@@ -47,4 +47,22 @@ const _encoded = _rot.encode(_input, { base64: true });
 const _decoded = _rot.decode(_encoded ?? "", { base64: true });
 
 log("(_input === _decoded) => ", _input === _decoded);
+```
+
+
+## Import & Export
+
+```ts
+const exported = _data.export("string");
+const imported = Data.import(exported);
+
+const imported_rot = new RotX(imported);
+
+const im_encoded = imported_rot.encode(_input, { base64: true });
+const im_decoded = imported_rot.decode(im_encoded ?? "", { base64: true });
+
+
+log("(_input === im_decoded) => ", _input === im_decoded);
+log("(im_encoded === _encoded) => ", im_encoded === _encoded);
+log("(_decoded === im_decoded) => ", _decoded === im_decoded);
 ```

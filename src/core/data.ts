@@ -6,6 +6,9 @@ import type {
 	RangeObjectArgsNumber,
 	RangeSeparators,
 	RangeStringArgsNumber,
+	DataJson,
+	RangeImportMethod,
+	RangeObjectArgs,
 } from "./types.ts";
 import { Range } from "./range.ts";
 import type { IRange } from "./range.ts";
@@ -186,7 +189,16 @@ export class Data implements IData {
 		});
 	}
 
-	import(data: string) {}
+	static import(input: string) {
+		const json: DataJson = JSON.parse(input) as DataJson;
+		const data = new Data(json.tag, json.rc);
+		json.ranges.forEach(r => {
+			if(json.type == "string") data.AddRange(Range.fromString(r as RangeStringArgsNumber))
+			if(json.type == "array") data.AddRange(Range.fromArray(r as RangeArrayArgsNumber))
+			if(json.type == "object") data.AddRange(Range.fromObject(r as RangeObjectArgsNumber))
+		});
+		return data;
+	}
 
 	static create(tag: string, rc: number = 7, ...ranges: Range[]): Data {
 		return new Data(tag, rc, ...ranges);

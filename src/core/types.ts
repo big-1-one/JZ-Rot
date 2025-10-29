@@ -82,6 +82,7 @@ export type RangeArg = String | number;
 
 export type RangeType = "string" | "array" | "object";
 export type RangeExportMethod = `as${Capitalize<RangeType>}`;
+export type RangeImportMethod = `from${Capitalize<RangeType>}`;
 
 export type DataJson = {
     tag: string;
