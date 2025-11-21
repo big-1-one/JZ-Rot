@@ -176,7 +176,7 @@ export class Range implements IRange {
 	): Range {
 		const [from, to, inc = Range.defaultInc] = string
 			.split(separator || Range.defaultSeparator)
-			.map((part, i) => i == 2 ? Utils.parse(part): Number.parseInt(part));
+			.map((part, i) => i == 2 ? Number.parseInt(part): Utils.parse(part));
 		return new Range(from, to, inc);
 	}
 

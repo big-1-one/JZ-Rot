@@ -1,6 +1,6 @@
 {
   "name": "jz-rot",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Perform (complex & simple) rotational letter substitution (such as ROT-13) in JavaScript.",
   "main": "./dist/index.js",
   "module": "./dist/esm/index.js",
